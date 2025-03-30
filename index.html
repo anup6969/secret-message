@@ -33,6 +33,9 @@
         
         const link = `${window.location.origin}/msg/${docRef.id}`;
         document.getElementById("link").innerHTML = `<a href='https://wa.me/?text=${encodeURIComponent(link)}' target='_blank'>Share on WhatsApp</a>`;
+   } catch (error) {
+            console.error("Error adding document: ", error);
+        }
     }
     
     async function cleanExpiredMessages() {
@@ -41,6 +44,9 @@
         snapshot.forEach(doc => {
             doc.ref.delete();
         });
+        } catch (error) {
+            console.error("Error deleting expired messages: ", error);
+        }
     }
     
     setInterval(cleanExpiredMessages, 60000); // Runs every minute
